@@ -1,3 +1,4 @@
+import 'package:fedesie_app/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
@@ -39,13 +40,13 @@ class _LoginState extends State<Login> {
           Column(
             children: [
               Expanded(
-                flex: 1,
+                flex: 2,
                   child: SizedBox(height: 10,)
               ),
               Expanded(
-                  flex: 7,
+                  flex: 8,
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(25, 50, 25, 20),
+                    padding: EdgeInsets.fromLTRB(25, 40, 25, 20),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -66,8 +67,8 @@ class _LoginState extends State<Login> {
                             TextFormField(
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
-                                label: Text('Email'),
-                                hintText: 'Email',
+                                label: Text("Email/Nom d'utilisateur",
+                                ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.orange,
@@ -82,12 +83,18 @@ class _LoginState extends State<Login> {
                                   borderRadius: BorderRadius.circular(20),
                                 )
                               ),
+                              validator: (String? value) {
+                                if(value!.length == 0){
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text("Entrer un nom d'utilisateur valid"))
+                                  );
+                                }
+                              },
                             ),
                             SizedBox(height: 40,),
                             TextFormField(
                               obscureText: true,
                               obscuringCharacter: '*',
-                              keyboardType: TextInputType.text,
                               validator: (String? value) {
                                 if(value == null || value.isNotEmpty){
                                   print('Svp, entrez un mot passe valid');
@@ -95,7 +102,8 @@ class _LoginState extends State<Login> {
                                 return null;
                               },
                               decoration: InputDecoration(
-                                  label: Text('Mot de passe'),
+                                  label: Text('Mot de passe',
+                                  ),
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.orange,
@@ -129,8 +137,11 @@ class _LoginState extends State<Login> {
                                     Text('Se souvenir de moi'),
                                   ],
                                 ),
-                                Text('Mot de passe oublié?',
-                                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green),
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: Text('Mot de passe oublié?',
+                                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green),
+                                  ),
                                 )
                               ],
                             ),
@@ -138,10 +149,74 @@ class _LoginState extends State<Login> {
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  if(_formSignInkey.currentState!.validate() && remenberPassword){
+                                    Navigator.of(context).pushNamedAndRemoveUntil('Accueil', (route) => false);
+                                  } else if(!remenberPassword) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('Svp, Veuillez accepter les conditions'))
+                                    );
+                                  }
+                                },
                                 child: Text('Se connecter'),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.orange,
+                                  foregroundColor: Colors.white,
+                                  textStyle: TextStyle(fontWeight: FontWeight.bold)
+                                ),
                               ),
                             ),
+                            SizedBox(height: 25.0),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Divider(
+                                    thickness: 0.7,
+                                    color: Colors.grey.withOpacity(0.5),
+                                  ),
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child: Text('Se connecter avec',
+                                    style: TextStyle(fontStyle: FontStyle.italic, color: Colors.black45)
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Divider(
+                                    thickness: 0.7,
+                                    color: Colors.grey.withOpacity(0.5),
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 25),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset('assets/search.png', width: 40, height: 40),
+                                Image.asset('assets/facebook.png', width: 40, height: 40),
+                                Image.asset('assets/vk.png', width: 40, height: 40)
+                              ],
+                            ),
+                            SizedBox(height: 25),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Vous n'avez pas encore un compte?",
+                                  style: TextStyle(color: Colors.black54),
+                                ),
+                                GestureDetector(
+                                  onTap: (){
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (_) => Signup())
+                                      );
+                                  },
+                                  child: Text('Creer un compte',
+                                    style: TextStyle(color: Colors.green, fontWeight: FontWeight.w800),
+                                  ),
+                                )
+                              ],
+                            )
                           ],
                         ),
                       ),

@@ -1,3 +1,4 @@
+import 'package:fedesie_app/pages/accueil.dart';
 import 'package:fedesie_app/pages/homepage.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'FEDISIE',
       home: HomePage(),
+      routes: {
+        "Accueil": (context) => Accueil(),
+      },
     );
   }
 }

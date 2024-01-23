@@ -1,3 +1,4 @@
+import 'package:fedesie_app/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:fedesie_app/pages/login.dart';
 
@@ -45,17 +46,22 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 40,),
               Column(
                 children: [
-                  Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.orange,
-                      borderRadius: BorderRadius.circular(20)
-                    ),
-                    child: Center(
-                      child: Text('Se connecter',
-                        style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20, color: Colors.white),),
-                    ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_) => Login()));
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                      child: Center(
+                          child: Text('Se connecter',
+                            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20, color: Colors.white),),
+                        ),
+                      ),
                   ),
                   SizedBox(height: 80,),
                   Row(
@@ -66,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(builder: (_) => Login())
+                            MaterialPageRoute(builder: (_) => Signup())
                           );
                         },
                         child: Text("S'inscrire",
