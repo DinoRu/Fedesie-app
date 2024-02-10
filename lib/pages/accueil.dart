@@ -1,6 +1,12 @@
 import 'dart:async';
 
+import 'package:fedesie_app/models/itemLists.dart';
+import 'package:fedesie_app/models/postsList.dart';
+import 'package:fedesie_app/utils/cards.dart';
+import 'package:fedesie_app/widgets/postlistwidget.dart';
 import 'package:flutter/material.dart';
+
+import 'detailpage.dart';
 
 class Accueil extends StatelessWidget {
   Accueil({super.key});
@@ -22,16 +28,131 @@ class AccueilHome extends StatefulWidget {
 
 class _AccueilHomeState extends State<AccueilHome> {
 
-  List<String> conferences = ['Conference 1', 'Conference 2', 'Conference 3'];
-  List<String> activites = ['Activite 1', 'Activite 2', 'Activite 3'];
-  List<String> debats = ['Debats 1', 'Debats 2', 'Debats 3'];
+  List<Item> conferences = [
+    Item(
+      id: 1,
+      title: "Tous savoir sur le cancer de la prostate",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna",
+      image: "assets/images/conference-1.jpg",
+      url: 'https://www.youtube.com/watch?v=jDDaplaOz7Q',
+      createdAt: DateTime(2024-03-13)
+    ),
+    Item(
+      id: 2,
+      title: "L'importance de connaitre son groupe sanguin",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna",
+      url: 'https://www.youtube.com/watch?v=jDDaplaOz',
+      image: "assets/images/conference-1.jpg",
+      createdAt: DateTime(2024-02-13)
+    ),
+
+    Item(
+        id: 3,
+        title: "Comment eviter de se faire hacker",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna",
+        url: 'https://www.youtube.com/watch?v=jDDaplaOz',
+        image: "assets/images/conference-1.jpg",
+        createdAt: DateTime(2024-05-13)
+    ),
+
+    Item(
+        id: 4,
+        title: "Comment obtenir le stauts de residence en Russie",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna",
+        url: 'https://www.youtube.com/watch?v=jDDaplaOz',
+        image: "assets/images/conference-1.jpg",
+        createdAt: DateTime(2024-01-30)
+    ),
+  ];
+  List<Item> activites = [
+    Item(
+      id: 1,
+      title: 'Nuit des Starts',
+      description: 'La nuit des starts est un evenement '
+          'qui a pour objectif de promouvoir '
+          'la musique et le style, les animations',
+      image: 'assets/images/nuit_des_starts.jpg',
+      url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      createdAt: DateTime(2024-05-02),
+    ),
+    Item(
+      id: 2,
+      title: 'Le festival de grillade',
+      description: 'L est un evenement cullinaire organisé dans le but de promouvoir la cusine et de rassembler nos differentes communautés autour d une table bien garnie',
+      image: 'assets/images/nuit_des_starts.jpg',
+      url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      createdAt: DateTime(2024-06-30),
+    ),
+
+    Item(
+      id: 2,
+      title: 'Miss de Universal',
+      description: 'L est un evenement organisé dans le but de promouvoir la culture et de rassembler nos differentes communautés autour d une table bien garnie',
+      image: 'assets/images/nuit_des_starts.jpg',
+      url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      createdAt: DateTime(2024-06-30),
+    ),
+    Item(
+      id: 2,
+      title: 'Fete de nouvel Ans',
+      description: 'L est un evenement organisé dans le but de celebrer et de rassembler nos differentes communautés autour d une table bien garnie',
+      image: 'assets/images/nouvel-an.jpeg',
+      url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      createdAt: DateTime(2024-06-30),
+    ),
+  ];
+  List<Item> debats = [
+      Item(
+          id: 1,
+          title: "Débat sur l'environnement",
+          image: 'assets/images/debat-1.jpeg',
+          url: 'https://www.youtube.youtube/evironment',
+          description: "Discussion sur les problèmes environnementaux actuels",
+          createdAt: DateTime(2024-04-02)
+      ),
+
+      Item(id: 2, title: 'Debat politique',
+          image: 'assets/images/debat-2.jpeg',
+          url: 'thtps://www.youtube.youtube/debat_politique/',
+          description: 'Analyse des enjeux politiques contemporains"',
+          createdAt: DateTime(2024-02-20)
+      ),
+
+      Item(
+          id: 3,
+          title: "Debat sur l'education",
+          image: 'assets/images/debat-3.jpeg',
+          url: 'https://www.youtube.youtube/education',
+          description: "Réflexion sur les défis du système éducatif",
+          createdAt: DateTime(2024-03-10)
+      ),
+
+      Item(
+          id: 4,
+          title: 'Debat sur social',
+          image: 'assets/images/debat_4.jpg',
+          url: 'https://www.youtube.youtube/social',
+          description: "Discussion sur les problèmes sociaux de notre société",
+          createdAt: DateTime(2024-04-10)
+      )
+  ];
 
   // Liste des annonces
   List<String> annonceImages = [
+    'assets/images/nouvel-an.jpeg',
+    'assets/images/debat-1.jpeg',
     'assets/love.png',
     'assets/shopping.png',
     'assets/vision.png',
     'assets/team.png'
+  ];
+
+  List<Post> posts = [
+    Post(
+        title: "Demande d'aide financiere",
+        description: "Dignissimos distinctio sint recusandae. Sequi possimus molestias repudiandae quas. Adipisci ea quo voluptate cumque saepe maxime omnis. Magnam aut earum pariatur quod quis consectetur. Itaque possimus deleniti ad tempore rem in ab. Minus ipsa quis.",
+        author: 'Mr Ephraim',
+        imageUrl: "assets/images/nuit_des_starts.jpg",)
   ];
 
   int currentAnnonceIndex = 0;
@@ -55,59 +176,102 @@ class _AccueilHomeState extends State<AccueilHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              color: Colors.black,
-              height: MediaQuery.of(context).size.height / 2,
-              child: PageView.builder(
-                  itemCount: annonceImages.length,
-                  itemBuilder: (context, index) {
-                    return Image.asset(annonceImages[index], fit: BoxFit.cover,);
-                  }
-              )
-            ),
-            // Build section conferences
-            buildSection('Conferences', conferences),
-            // Section activites
-            buildSection('Activites', activites),
-            // Section debats
-            buildSection('Debats', debats),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 44),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                width: MediaQuery.of(context).size.width,
+                height: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: PageView.builder(
+                    itemCount: annonceImages.length,
+                    itemBuilder: (context, index) {
+                      return MyCard(imageUrl: annonceImages[index]);
+                    }
+                )
+              ),
+              const SizedBox(height: 50,),
+              // build lists of recents posts
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Text("Recents posts", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+              ),
+              SizedBox(height: 10),
+              //
+              SizedBox(height: 44,),
+              // Build section conferences
+              buildSection('Conferences', conferences),
+              SizedBox(height: 20,),
+              // Section activites
+              buildSection('Activites', activites),
+              SizedBox(height: 20),
+              // Section debats
+              buildSection('Debats', debats),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget buildSection(String title, List<String> items ) {
+  Widget buildSection(String title, List<Item> items ) {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),),
-        Container(
-          height: MediaQuery.of(context).size.height / 4,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: (items.length / 2).ceil(),
-            itemBuilder: (context, index) {
-              int startIndex = index * 2;
-              int endIndex = startIndex + 2;
-              if( endIndex > items.length) {
-                endIndex = items.length;
-              }
-
-              List<String> currentRow = items.sublist(startIndex, endIndex);
-              return Row(
-                children: items.map((item) {
-                  return Card(
-                    child: Text(item),
-                  );
-                }).toList(),
-              );
-            }),
-        )
+        Padding(
+          padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(title, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+              Icon(Icons.add, size: 30,)
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Container(
+            height: 150,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                return Row(
+                  children: items.map((item) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(
+                            item: item
+                          )));
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 2,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20)
+                          ),
+                          child: Card(
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.asset(item.image, fit: BoxFit.cover))
+                            ,
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                );
+              }),
+          ),
+        ),
       ],
     );
   }

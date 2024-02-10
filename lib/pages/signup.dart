@@ -30,13 +30,11 @@ class _SignupState extends State<Signup> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("S'inscrire", style: TextStyle(color: Colors.white),),
-            Text('Se Connecter', style: TextStyle(color: Colors.white),)
-          ],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       body: Stack(
@@ -45,7 +43,7 @@ class _SignupState extends State<Signup> {
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.green,
+              color: Colors.black12,
             ),
           ),
           Column(
@@ -141,20 +139,21 @@ class _SignupState extends State<Signup> {
                               ),
                             ),
                             SizedBox(height: 20),
-                            Row(
-                              children: [
-                                Checkbox(
-                                    value: _acceptedPolicy,
-                                    onChanged: (bool? value) => setState(() {
-                                        _acceptedPolicy = value!;
-                                    }),
-                                  activeColor: Colors.orange,
-                                ),
-                                Text("J'accepte le "),
-                                Text("T&C", style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),),
-                                Text(" et "),
-                                Text("politique de confidentialité", style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold), textAlign: TextAlign.start,),
-                              ],
+                            Container(
+                              width: double.infinity,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Checkbox(
+                                      value: _acceptedPolicy,
+                                      onChanged: (bool? value) => setState(() {
+                                          _acceptedPolicy = value!;
+                                      }),
+                                    activeColor: Colors.orange,
+                                  ),
+                                  Text("J'accepte les conditions d'utilisation")
+                                ],
+                              ),
                             ),
                             SizedBox(height: 25.0),
                             SizedBox(
@@ -212,24 +211,7 @@ class _SignupState extends State<Signup> {
                               ],
                             ),
                             SizedBox(height: 25),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Vous n'avez pas encore un compte?",
-                                  style: TextStyle(color: Colors.black54),
-                                ),
-                                GestureDetector(
-                                  onTap: (){
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (_) => Signup())
-                                    );
-                                  },
-                                  child: Text('Creer un compte',
-                                    style: TextStyle(color: Colors.green, fontWeight: FontWeight.w800),
-                                  ),
-                                )
-                              ],
-                            )
+
                           ],
                         ),
                       )

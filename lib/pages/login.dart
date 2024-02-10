@@ -17,31 +17,22 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        title: Text('Connexion'),
         backgroundColor: Colors.transparent,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("S'inscrire", style: TextStyle(color: Colors.white),),
-            Text('Se Connecter', style: TextStyle(color: Colors.white),)
-          ],
-        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        )
       ),
       body: Stack(
         children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.orange,
-            ),
-          ),
           Column(
             children: [
               Expanded(
-                flex: 2,
-                  child: SizedBox(height: 10,)
+                flex: 1,
+                  child: SizedBox(height: 2,)
               ),
               Expanded(
                   flex: 8,
@@ -199,23 +190,25 @@ class _LoginState extends State<Login> {
                               ],
                             ),
                             SizedBox(height: 25),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Vous n'avez pas encore un compte?",
-                                  style: TextStyle(color: Colors.black54),
-                                ),
-                                GestureDetector(
-                                  onTap: (){
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (_) => Signup())
-                                      );
-                                  },
-                                  child: Text('Creer un compte',
-                                    style: TextStyle(color: Colors.green, fontWeight: FontWeight.w800),
+                            FittedBox(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Vous n'avez pas encore un compte?",
+                                    style: TextStyle(color: Colors.black54),
                                   ),
-                                )
-                              ],
+                                  GestureDetector(
+                                    onTap: (){
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(builder: (_) => Signup())
+                                        );
+                                    },
+                                    child: Text('Creer un compte',
+                                      style: TextStyle(color: Colors.green, fontWeight: FontWeight.w800),
+                                    ),
+                                  )
+                                ],
+                              ),
                             )
                           ],
                         ),
