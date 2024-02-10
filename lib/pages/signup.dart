@@ -42,9 +42,6 @@ class _SignupState extends State<Signup> {
           Container(
             width: double.infinity,
             height: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.black12,
-            ),
           ),
           Column(
             children: [
@@ -58,10 +55,7 @@ class _SignupState extends State<Signup> {
                     padding: EdgeInsets.fromLTRB(25, 40, 20, 20),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(40),
-                        topRight: Radius.circular(40)
-                      )
+
                     ),
                     child: SingleChildScrollView(
                       child: Form(

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:fedesie_app/models/itemLists.dart';
 import 'package:fedesie_app/models/postsList.dart';
 import 'package:fedesie_app/utils/cards.dart';
+import 'package:fedesie_app/widgets/big_text.dart';
 import 'package:fedesie_app/widgets/postlistwidget.dart';
 import 'package:flutter/material.dart';
 
@@ -204,6 +205,7 @@ class _AccueilHomeState extends State<AccueilHome> {
               ),
               SizedBox(height: 10),
               //
+              BigText(color: Color(0xFF3E3D3), text: 'Annonces recentes'),
               SizedBox(height: 44,),
               // Build section conferences
               buildSection('Conferences', conferences),
