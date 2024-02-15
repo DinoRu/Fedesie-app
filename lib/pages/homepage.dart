@@ -10,6 +10,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  List pages = [
+    'HomePage()',
+    'ContactPage()',
+    'CommunityPage()',
+    'AnnoncePage()',
+    'ProfilePage()',
+  ];
+
+  int currentIndex = 0;
+
+  void onTap(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

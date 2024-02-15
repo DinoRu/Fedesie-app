@@ -142,7 +142,7 @@ class _LoginState extends State<Login> {
                               child: ElevatedButton(
                                 onPressed: (){
                                   if(_formSignInkey.currentState!.validate() && remenberPassword){
-                                    Navigator.of(context).pushNamedAndRemoveUntil('Accueil', (route) => false);
+                                    Navigator.of(context).pushNamedAndRemoveUntil('mainpage', (route) => false);
                                   } else if(!remenberPassword) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(content: Text('Svp, Veuillez accepter les conditions'))

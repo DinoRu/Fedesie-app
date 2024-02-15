@@ -2,11 +2,16 @@ import 'dart:async';
 
 import 'package:fedesie_app/models/itemLists.dart';
 import 'package:fedesie_app/models/postsList.dart';
+// import 'package:fedesie_app/pages/homepage.dart';
+import 'package:fedesie_app/pages/profile_page.dart';
 import 'package:fedesie_app/utils/cards.dart';
-import 'package:fedesie_app/widgets/big_text.dart';
-import 'package:fedesie_app/widgets/postlistwidget.dart';
+// import 'package:fedesie_app/widgets/big_text.dart';
+import 'package:fedesie_app/widgets/card_item.dart';
+// import 'package:fedesie_app/widgets/postlistwidget.dart';
 import 'package:flutter/material.dart';
-
+import '../widgets/card_recent.dart';
+import 'annonce_page.dart';
+import 'contact_page.dart';
 import 'detailpage.dart';
 
 class Accueil extends StatelessWidget {
@@ -28,6 +33,13 @@ class AccueilHome extends StatefulWidget {
 }
 
 class _AccueilHomeState extends State<AccueilHome> {
+
+  List pages = [
+    Accueil(),
+    ContactPage(),
+    AnnoncePage(),
+    ProfilePage(),
+  ];
 
   List<Item> conferences = [
     Item(
@@ -157,32 +169,40 @@ class _AccueilHomeState extends State<AccueilHome> {
   ];
 
   int currentAnnonceIndex = 0;
+  int currentIndex = 0;
+
+  void onTap(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    startScrollTimer();
-  }
-
-  void startScrollTimer() {
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        currentAnnonceIndex = (currentAnnonceIndex + 1) % annonceImages.length;
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // backgroundColor: Colors.grey.withOpacity(0.2),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 44),
+              const SizedBox(height: 24),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Row(
+                  children: [
+                    Text('Lundi, 12/02/2024', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),)
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 width: MediaQuery.of(context).size.width,
@@ -201,15 +221,17 @@ class _AccueilHomeState extends State<AccueilHome> {
               // build lists of recents posts
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Text("Recents posts", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                child: Text("Dernieres infos", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 15),
               //
-              BigText(color: Color(0xFF3E3D3), text: 'Annonces recentes'),
-              SizedBox(height: 44,),
+              RCard(title: 'Demande d aide financieres', thumbnail: 'assets/images/debat-1.jpeg', time: '30min'),
+              SizedBox(height:5),
+              RCard(title: 'Passport disponible', thumbnail: "assets/images/photo_fedesie_annonce.jpg", time: 'Il y 10min'),
+              SizedBox(height: 20),
               // Build section conferences
               buildSection('Conferences', conferences),
-              SizedBox(height: 20,),
+              SizedBox(height: 20),
               // Section activites
               buildSection('Activites', activites),
               SizedBox(height: 20),
@@ -232,48 +254,48 @@ class _AccueilHomeState extends State<AccueilHome> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+              Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
               Icon(Icons.add, size: 30,)
             ],
           ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Container(
-            height: 150,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                return Row(
-                  children: items.map((item) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 10.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(
-                            item: item
-                          )));
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width / 2,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20)
-                          ),
-                          child: Card(
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.asset(item.image, fit: BoxFit.cover))
-                            ,
+            child: Container(
+              height: 250,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return Row(
+                    children: items.map((item) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 10.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(
+                              item: item
+                            )));
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20)
+                            ),
+                            child: ItemCard(
+                              title: item.title,
+                              date: '08/03/2024',
+                              thumbnail: item.image,
+                              location: "Moscou",
+                            )
                           ),
                         ),
-                      ),
-                    );
-                  }).toList(),
-                );
-              }),
+                      );
+                    }).toList(),
+                  );
+                }),
+            ),
           ),
-        ),
       ],
     );
   }
