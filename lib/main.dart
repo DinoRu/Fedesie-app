@@ -15,6 +15,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FEDISIE',
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blueGrey,
+        backgroundColor: Colors.black,
+        colorScheme: ColorScheme.dark(
+          primary: Colors.grey[800]!,
+          surface: Colors.black,
+          background: Colors.black,
+          error: Colors.red,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.white,
+          onBackground: Colors.white,
+          onError: Colors.white,
+        )
+      ),
+      themeMode: ThemeMode.system,
       home: Scaffold(
         body: HomePage(),
 

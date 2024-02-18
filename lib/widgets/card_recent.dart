@@ -18,6 +18,8 @@ class RCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Card(
+        elevation: 0,
+        color: Colors.grey[200],
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
           decoration: BoxDecoration(
